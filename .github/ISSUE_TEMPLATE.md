@@ -1,3 +1,3 @@
 Please use one of the following templates:
 
-https://github.com/GITHUB_ORGANIZATION/GITHUB_REPOSITORY/issues/new/choose
+https://github.com/jangalinski/camunda-girls-day-2022/issues/new/choose

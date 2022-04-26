@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>BASE_GROUP_ID</groupId>
-  <artifactId>BASE_ARTIFACT_ID</artifactId>
+  <groupId>io.github.girlsday</groupId>
+  <artifactId>camunda-girls-day-2022</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>${project.artifactId}</name>
-  <description>BASE_DESCRIPTION</description>
-  <url>https://github.com/GITHUB_ORGANIZATION/GITHUB_REPOSITORY/</url>
+  <description>camunda-girls-day-2022</description>
+  <url>https://github.com/jangalinski/camunda-girls-day-2022/</url>
 
   <properties>
     <project.encoding>UTF-8</project.encoding>
@@ -598,9 +598,9 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git@github.com:GITHUB_ORGANIZATION/GITHUB_REPOSITORY.git</connection>
-    <url>scm:git:git@github.com:GITHUB_ORGANIZATION/GITHUB_REPOSITORY.git</url>
-    <developerConnection>scm:git:git@github.com:GITHUB_ORGANIZATION/GITHUB_REPOSITORY.git</developerConnection>
+    <connection>scm:git:git@github.com:jangalinski/camunda-girls-day-2022.git</connection>
+    <url>scm:git:git@github.com:jangalinski/camunda-girls-day-2022.git</url>
+    <developerConnection>scm:git:git@github.com:jangalinski/camunda-girls-day-2022.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 

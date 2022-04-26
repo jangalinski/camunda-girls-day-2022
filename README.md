@@ -1,10 +1,10 @@
-# BASE_ARTIFACT_ID
+# camunda-girls-day-2022
 
 Template repository for usage in organizations: toolisticon, holunda-io, holixon...
 
-[![Build Status](https://github.com/GITHUB_ORGANIZATION/GITHUB_REPOSITORY/workflows/Development%20branches/badge.svg)](https://github.com/GITHUB_ORGANIZATION/GITHUB_REPOSITORY/actions)
+[![Build Status](https://github.com/jangalinski/camunda-girls-day-2022/workflows/Development%20branches/badge.svg)](https://github.com/jangalinski/camunda-girls-day-2022/actions)
 [![sponsored](https://img.shields.io/badge/sponsoredBy-Holisticon-RED.svg)](https://holisticon.de/)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/BASE_GROUP_ID/BASE_ARTIFACT_ID/badge.svg)](https://maven-badges.herokuapp.com/maven-central/BASE_GROUP_ID/BASE_ARTIFACT_ID)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.girlsday/camunda-girls-day-2022/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.girlsday/camunda-girls-day-2022)
 
 This repository is a **template repository** designed to be a template for the next project.
 

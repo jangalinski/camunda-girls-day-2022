@@ -1,4 +1,4 @@
-package BASE_GROUP_ID
+package io.github.girlsday
 
 object KotlinLibTemplate {
 
