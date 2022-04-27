@@ -1,0 +1,7 @@
+camunda:
+  bpm:
+    admin-user:
+      id: admin
+    login:
+      enabled: true
+      user-id: admin

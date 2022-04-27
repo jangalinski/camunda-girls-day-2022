@@ -5,6 +5,7 @@
   <groupId>io.github.girlsday</groupId>
   <artifactId>camunda-girls-day-2022</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+
   <name>${project.artifactId}</name>
   <description>camunda-girls-day-2022</description>
   <url>https://github.com/jangalinski/camunda-girls-day-2022/</url>
@@ -17,6 +18,10 @@
     <kotlin.version>1.6.21</kotlin.version>
     <java.version>11</java.version>
 
+    <spring-boot.version>2.6.7</spring-boot.version>
+    <camunda.version>7.17.0</camunda.version>
+    <camunda-autologin.version>0.0.1</camunda-autologin.version>
+
     <!-- TEST -->
     <kotlin-logging.version>2.1.21</kotlin-logging.version>
     <junit5.version>5.8.2</junit5.version>
@@ -26,6 +31,7 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- KOTLIN -->
       <dependency>
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-bom</artifactId>
@@ -33,6 +39,26 @@
         <scope>import</scope>
         <type>pom</type>
       </dependency>
+
+      <!-- SPRING BOOT -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+
+      <!-- CAMUNDA -->
+      <dependency>
+        <groupId>org.camunda.bpm</groupId>
+        <artifactId>camunda-bom</artifactId>
+        <version>${camunda.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+
+      <!-- TEST -->
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
@@ -59,6 +85,25 @@
       <version>${kotlin-logging.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.holunda</groupId>
+      <artifactId>camunda-platform-7-autologin</artifactId>
+      <version>${camunda-autologin.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
     <!-- TEST -->
     <dependency>
       <groupId>org.mockito.kotlin</groupId>
@@ -205,8 +250,8 @@
           <configuration>
             <jvmTarget>${java.version}</jvmTarget>
             <compilerPlugins>
-              <!--<plugin>spring</plugin>-->
-              <!--plugin>jpa</plugin-->
+              <plugin>spring</plugin>
+              <plugin>jpa</plugin>
               <plugin>no-arg</plugin>
               <plugin>all-open</plugin>
             </compilerPlugins>
@@ -262,7 +307,7 @@
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.2.0</version>
           <configuration>
-            <encoding>UTF-8</encoding>
+            <encoding>${project.encoding}</encoding>
           </configuration>
         </plugin>
 
@@ -403,112 +448,11 @@
           </executions>
         </plugin>
 
-        <!-- gitflow -->
-        <plugin>
-          <groupId>com.amashchenko.maven.plugin</groupId>
-          <artifactId>gitflow-maven-plugin</artifactId>
-          <version>1.18.0</version>
-          <configuration>
-            <gitFlowConfig>
-              <productionBranch>master</productionBranch>
-              <developmentBranch>develop</developmentBranch>
-              <featureBranchPrefix>feature/</featureBranchPrefix>
-              <releaseBranchPrefix>release/</releaseBranchPrefix>
-              <hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
-              <supportBranchPrefix>support/</supportBranchPrefix>
-              <origin>origin</origin>
-            </gitFlowConfig>
-            <useSnapshotInHotfix>true</useSnapshotInHotfix>
-            <useSnapshotInRelease>true</useSnapshotInRelease>
-            <keepBranch>false</keepBranch>
-            <pushRemote>true</pushRemote>
-          </configuration>
-        </plugin>
-
-        <!-- To sign the artifacts -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-gpg-plugin</artifactId>
-          <version>3.0.1</version>
-          <configuration>
-            <gpgArguments>
-              <arg>--batch</arg>
-              <arg>--yes</arg>
-              <arg>--pinentry-mode</arg>
-              <arg>loopback</arg>
-            </gpgArguments>
-          </configuration>
-          <executions>
-            <execution>
-              <id>sign-artifacts</id>
-              <phase>verify</phase>
-              <goals>
-                <goal>sign</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-
-        <!-- Deploy -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-          <configuration>
-            <skip>true</skip>
-          </configuration>
-        </plugin>
-
-        <!-- nexus staging -->
-        <plugin>
-          <groupId>org.sonatype.plugins</groupId>
-          <artifactId>nexus-staging-maven-plugin</artifactId>
-          <version>1.6.13</version>
-          <configuration>
-            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-            <serverId>ossrh</serverId>
-            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          </configuration>
-          <executions>
-            <execution>
-              <id>default-deploy</id>
-              <phase>deploy</phase>
-              <goals>
-                <goal>deploy</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
 
         <!-- Install -->
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
-        </plugin>
-
-        <!-- Enforce -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.0.0</version>
-          <executions>
-            <execution>
-              <id>enforce-maven</id>
-              <goals>
-                <goal>enforce</goal>
-              </goals>
-              <configuration>
-                <rules>
-                  <requireJavaVersion>
-                    <version>11</version>
-                  </requireJavaVersion>
-                  <requireMavenVersion>
-                    <version>3.6.0</version>
-                  </requireMavenVersion>
-                </rules>
-              </configuration>
-            </execution>
-          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -522,13 +466,23 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-      </plugin>
+
       <plugin>
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
@@ -549,41 +503,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <!--
-      Profile creating all artifacts: JARs, POMs, Sources, JavaDoc and all signatures.
-    -->
-    <profile>
-      <id>release</id>
-      <activation>
-        <property>
-          <name>release</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <groupId>org.jetbrains.dokka</groupId>
-            <artifactId>dokka-maven-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
@@ -617,25 +536,20 @@
 
   <developers>
     <developer>
-      <id>jangalinski</id>
-      <name>Jan Galinski</name>
+      <id>radost.mincheva</id>
+      <name> Radost Nikolaeva Mincheva</name>
       <roles>
-        <role>Product Owner</role>
         <role>Developer</role>
       </roles>
-      <organization>Holisticon AG</organization>
-      <organizationUrl>https://holisticon.de</organizationUrl>
+      <organization>Gymnasium Bondenwald</organization>
     </developer>
     <developer>
-      <id>zambrovski</id>
-      <name>Simon Zambrovski</name>
+      <id>julia.galinski</id>
+      <name>Julia Galinski</name>
       <roles>
-        <role>Product Owner</role>
         <role>Developer</role>
-        <role>Toolsmith</role>
       </roles>
-      <organization>Holisticon AG</organization>
-      <organizationUrl>https://holisticon.de</organizationUrl>
+      <organization>Gymnasium Bondenwald</organization>
     </developer>
   </developers>
 </project>
