@@ -1,12 +1,22 @@
 package io.github.girlsday
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 
-internal class KotlinLibTemplateTest {
+fun main() {
 
-  @Test
-  fun `dummy test`() {
-    assertThat(1 + 1).isEqualTo(2)
+  repeat(100) {
+
+
+    println("I am a magical unicorn.")
+    println("Maneskin are the best")
+    println (candylaaaauf(4,100))
   }
+}
+
+
+
+fun candylaaaauf (rainbow:Int,maneskin:Int) :Int {
+
+  return rainbow + maneskin
+
+
 }
